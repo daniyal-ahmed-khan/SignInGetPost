@@ -1,7 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 
-const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
+const TextArea = ({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  secureTextEntry,
+}) => {
   return (
     <View style={styles.containerStyle}>
       <Text style={styles.labelStyle}>{label}</Text>
@@ -38,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {Input};
+export {TextArea};

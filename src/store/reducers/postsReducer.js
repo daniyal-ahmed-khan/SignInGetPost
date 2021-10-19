@@ -1,4 +1,4 @@
-import {GET_DATA, POST_DATA} from '../actions/actionTypes';
+import {GET_DATA, POST_DATA, SAVE_ALL_POST_DATA} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   posts: [],
@@ -13,8 +13,9 @@ export default (state = INITIAL_STATE, action) => {
     case POST_DATA:
       return {
         ...state,
-        posts: action.payload,
+        posts: [action.payload, ...state.posts],
       };
+
     default:
       return state;
   }
