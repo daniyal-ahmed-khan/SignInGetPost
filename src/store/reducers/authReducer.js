@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGOUT_REQUEST} from '../actions/actionTypes';
+import {LOGIN_REQUEST, LOGOUT_REQUEST} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   isLogin: false,
@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS: {
+    case LOGIN_REQUEST: {
       return {
         ...state,
         isLogin: true,

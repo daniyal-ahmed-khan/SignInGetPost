@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useDispatch} from 'react-redux';
 import {Card, CardSection, TextArea, Input, Spinner, Button} from '../common';
 import {saveNewPost} from '../store/actions/actions';
+import {useDispatch} from 'react-redux';
 
 const NewPost = props => {
   const [title, setTitle] = useState('');
@@ -47,7 +47,15 @@ const NewPost = props => {
   return (
     <View style={styles?.container}>
       <Text style={styles?.heading}>New Post</Text>
-      <Card>
+      <TouchableOpacity style={styles.newPost}>
+        <Icon name="chevron-left" color="white" size={20} />
+        <Text
+          style={styles.newPostText}
+          onPress={() => props.navigation.goBack()}>
+          Back
+        </Text>
+      </TouchableOpacity>
+      <View style={{marginTop: 50}}>
         <CardSection>
           <Input
             placeholder="Post Title"
@@ -78,7 +86,7 @@ const NewPost = props => {
             </TouchableOpacity>
           )}
         </CardSection>
-      </Card>
+      </View>
     </View>
   );
 };
@@ -86,6 +94,22 @@ const NewPost = props => {
 export default NewPost;
 
 const styles = StyleSheet.create({
+  newPost: {
+    backgroundColor: '#044d81',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: Dimensions.get('window').width * 0.05,
+    width: Dimensions.get('window').width * 0.4,
+    height: Dimensions.get('window').height * 0.06,
+    borderRadius: Dimensions.get('window').width * 0.019,
+  },
+  newPostText: {
+    color: 'white',
+    marginLeft: 10,
+    fontSize: Dimensions.get('window').width * 0.05,
+    fontWeight: '600',
+  },
   container: {
     flex: 1,
     marginHorizontal: Dimensions.get('window').width * 0.05,

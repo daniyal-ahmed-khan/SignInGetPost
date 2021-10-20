@@ -6,6 +6,7 @@ import {
 } from './actionTypes';
 
 export function loginRequest(email, password) {
+  console.log({email, password});
   return {
     type: LOGIN_REQUEST,
     payload: {email, password},

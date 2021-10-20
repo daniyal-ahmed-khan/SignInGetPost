@@ -10,15 +10,17 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MatIcon from 'react-native-vector-icons/MaterialIcons';
 import {CardSection, Spinner} from '../common';
 import {useDispatch, useSelector} from 'react-redux';
-import {saveAllGetData} from '../store/actions/actions';
+import {logout, saveAllGetData} from '../store/actions/actions';
 
 const HomeScreen = props => {
   let posts = useSelector(state => state.postsReducer.posts);
+  let email = useSelector(state => state.authReducer.email);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-
+  console.log({email});
   const headers = {
     Accept: 'application/json',
   };
@@ -39,16 +41,29 @@ const HomeScreen = props => {
     getAllPosts();
   }, []);
 
+  const handleLogOut = () => {
+    dispatch(logout());
+    props.navigation.navigate('Login');
+  };
   return (
     <View style={styles?.container}>
-      <TouchableOpacity style={styles.newPost}>
-        <Icon name="plus" color="white" size={20} />
-        <Text
-          style={styles.newPostText}
-          onPress={() => props.navigation.navigate('NewPost')}>
-          New Post
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.newPost}>
+          <Icon name="plus" color="white" size={20} />
+          <Text
+            style={styles.newPostText}
+            onPress={() => props.navigation.navigate('NewPost')}>
+            New Post
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.newPost}>
+          <MatIcon name="logout" color="white" size={20} />
+          <Text style={styles.newPostText} onPress={() => handleLogOut()}>
+            LogOut
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <Text style={styles?.heading}>Fetched Posts From Dummy API</Text>
       {isLoading ? (
         <Spinner size="large" />
@@ -74,6 +89,10 @@ const HomeScreen = props => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   container: {
     flex: 1,
     marginHorizontal: Dimensions.get('window').width * 0.02,
