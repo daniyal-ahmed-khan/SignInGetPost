@@ -8,7 +8,8 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_DATA:
       return {
-        posts,
+        ...state,
+        posts: action.payload,
       };
     case POST_DATA:
       return {

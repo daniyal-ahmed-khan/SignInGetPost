@@ -16,7 +16,6 @@ import {saveAllGetData} from '../store/actions/actions';
 
 const HomeScreen = props => {
   let posts = useSelector(state => state.postsReducer.posts);
-  console.log({posts});
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
   heading: {
     fontWeight: '700',
     fontSize: Dimensions.get('window').width * 0.05,
+    fontFamily: 'PatuaOne-Regular',
     marginVertical: Dimensions.get('window').width * 0.02,
   },
 });

@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import {Card, CardSection, TextArea, Input, Spinner, Button} from '../common';
 import {saveNewPost} from '../store/actions/actions';
 
-const NewPost = () => {
+const NewPost = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +35,9 @@ const NewPost = () => {
 
     if (response !== undefined) {
       console.log('posted');
-      dispatch(saveNewPost);
+
+      dispatch(saveNewPost(post));
+      props.navigation.goBack();
     } else {
       console.log('error');
     }
@@ -68,7 +70,12 @@ const NewPost = () => {
           {isLoading ? (
             <Spinner size="large" />
           ) : (
-            <Button onPress={() => sendNewPost()}>Submit Post</Button>
+            <TouchableOpacity
+              onPress={() => sendNewPost()}
+              style={styles.buttonStyle}>
+              <Icon name="check" color="#044d81" size={25} />
+              <Text style={styles.textStyle}>{'Submit Post'}</Text>
+            </TouchableOpacity>
           )}
         </CardSection>
       </Card>
@@ -87,5 +94,26 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: Dimensions.get('window').width * 0.05,
     marginVertical: Dimensions.get('window').width * 0.02,
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: '#007aff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginLeft: 10,
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    width: Dimensions?.get('window').width * 0.8,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#007aff',
+    marginLeft: 5,
+    marginRight: 5,
   },
 });
